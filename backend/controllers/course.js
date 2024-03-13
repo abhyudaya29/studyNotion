@@ -58,8 +58,13 @@ exports.createCourse=async (req,res)=>{
                 $push:{
                     courses:newCourse._id
                 }
-            }
+            },
+            {new:true}
+
         )
+        // update tag schema
+
+        // to be coded.....
         // return response
         return res.status(200).json({
             success:true,
@@ -78,3 +83,32 @@ exports.createCourse=async (req,res)=>{
     }
 }
 // fetch all course
+exports.showAllCourse=async(req,res)=>{
+    try {
+        const allCourses=await Course.find({},{courseName:true,
+            price:true,
+            thumbnail:true,
+            instructor:true,
+            ratingAndReviews:true,
+            studentsEnrolled:true
+
+            
+        }).populate("instructor").exec();
+        return restatus(200).json({
+            success:true,
+            message:"Fetched all courses",
+            data:allCourses
+        })
+
+
+        
+    } catch (error) {
+        console.log(error,"Error while show all course");
+        return res.status(500).json({
+            success:false,
+            message:"Can not fetch course",
+            error:error.message
+        })
+        
+    }
+}
