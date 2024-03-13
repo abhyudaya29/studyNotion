@@ -43,6 +43,13 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    // We are keeping token & expires for evry user 
+    token:{
+        type:String,
+    },
+    resetPasswordExpires:{
+        type:Date
+    },
     courseProgress:[
         {
             type:mongoose.Schema.Types.ObjectId,
