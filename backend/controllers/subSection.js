@@ -53,5 +53,62 @@ exports.createSubSection=async(req,res)=>{
     }
 }
 // Todo:Update SubSection
+const updateSubSection=async (req,res)=>{
+    try {
+        // fetch data
+        const {title,description,videoUrl,subSectionId}=req.body;
+
+        // validation
+        if(!title || !description || !videoUrl){
+            return res.status(400).json({
+                success:false,
+                message:"All fields are required"
+            })
+        }
+        // findbyId and Update
+        const updatedSubSection=await SubSection.findByIdAndUpdate(subSectionId,{title},{description},{videoUrl},{new:true});
+        console.log(updateSubSection,">>updated sub Section");
+
+        // return res
+        return res.status(200).json({
+            success:true,
+            message:"Sub section updated successfully"
+        })
+        
+    } catch (error) {
+        console.log(error,"Error in updating subsection");
+        return res.status(500).json({
+            success:false,
+            message:"Error occured during updating sub section"
+        })
+        
+    }
+}
 
 // Todo:Delete  SubSection
+const deleteSubSection=async (req,res)=>{
+    try {
+        // fetch id from params
+        const {subSectionId}=req.params;
+
+        // find id from db and remove it
+        await SubSection.findByIdAndDelete(subSectionId);
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Sub section  deleted Successfully"
+
+        })
+    
+
+
+        
+    } catch (error) {
+        console.log(error,"error while deleting sub-section");
+        return res.status(500).json({
+            success:false,
+            message:"sub-section deleted successfully"
+        })
+        
+    }
+}
