@@ -9,7 +9,7 @@ const dbconnection=async ()=>{
             useUnifiedTopology: true
     
         })
-        console.log("DB connection Successfully")
+        console.log(`DB connection successfullt at ${mongoose.connection.host}`)
 
     }catch(error){
         console.log("Error in connecting to the database",error);
