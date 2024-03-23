@@ -92,3 +92,69 @@ exports.capturePayment=async(req,res)=>{
 }
 
 // verify Signature of razorPay
+exports.verifySignature=async (req,res)=>{
+
+    try {
+        const webHookSecret="123456";
+
+        //  get the signature from request body,it is send my the razorpay
+        const signature=req.headers["x-razorpay-signature"];
+        // The following steps are used to convert webHook to a hashed string
+        const shaSum=crypto.createHmac("sha256",webHookSecret);
+        // converting shasum to sring
+        shaSum.update(JSON.stringify(req.body));
+        const digest=shaSum.digest("hex")
+
+        // matching digest and signature
+        if(digest===signature){
+            console.log("Payment is successfuly");
+            const{courseId,userId}=req.body.payload.payment.entity.notes;
+
+            // fullfill the action
+            // find the course and enroll the student
+            const enrolledCourse=await Course.findOneAndUpdate(
+                {_id:courseId},
+                {$push:{studentsEnrolled:userId}},
+                {new:true}
+            );
+            if(!enrolledCourse){
+                return res.status(500).json({
+                    success:false,
+                    message:"Course not found"
+                })
+            };
+            console.log(enrolledCourse,">>enrolled course");
+
+            // find the student and add course list iof enrolled course
+            const enrolledStudent=await User.findOneAndUpdate(
+                {_id:userId},
+                {$push:{courses:courseId}},
+                {new:true}
+            )
+            console.log(enrolledCourse,">>enrolled Course")
+
+            // send confortamtion mail
+            const emailResponse=await mailSender(
+                enrolledStudent.email,
+                "Congrats, you are Enrolled To the new course",
+                "Congrats, you are Enrolled To the new course",
+
+            );
+            console.log(emailResponse,">>emailResponse");
+            return res.status(200).json({
+                success:true,
+                message:"Signature verified and course added"
+            })
+
+        }
+
+        
+    } catch (error) {
+        console.log(error,"Error while verifying signature");
+        return res.status(500).json({
+            success:false,
+            message:error
+        })
+        
+    }
+}
