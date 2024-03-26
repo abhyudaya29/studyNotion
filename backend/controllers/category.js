@@ -57,3 +57,44 @@ exports.showAllCategory=async(req,res)=>{
         
     }
 }
+
+exports.categoryPageDetails=async (req,res)=>{
+    try {
+        // get category id
+        const{categoryId}=req.body;
+        // get courses for specified category id
+        const selectedCategory=await Category.findById(categoryId)
+                                                .populate("Courses").exec();
+        // validation
+        if(!selectedCategory){
+            return res.status(404).json({
+                succcess:false,
+                message:"Data not found"
+            })
+        }
+        // get courses for different category
+        const differentcategories=await Category.find({
+                                        _id:{$ne:categoryId}
+        }).populate("Courses").exec();
+        //TODO:  get top courses
+        // return res
+        return res.status(200).json({
+            success:true,
+            data:{
+                selectedCategory,
+                differentcategories
+            }
+        })
+
+    
+        
+    } catch (error) {
+        console.log(error,"error while categoryPageDetails")
+
+        return res.status(500).json({
+            success:false,
+            message:error
+        })
+        
+    }
+}
