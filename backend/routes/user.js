@@ -3,6 +3,7 @@ const router=express.Router();
 
 // import the required controllers
 const{signUp,sendOTP,login}=require('../controllers/auth');
+
 const {resetPasswordToken,resetPassword}=require('../controllers/resetPassword');
 const{auth}=require('../middlewares/auth');
 
