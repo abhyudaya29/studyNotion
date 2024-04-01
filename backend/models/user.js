@@ -43,6 +43,11 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    actibe:{
+        type:Boolean,
+        required:true
+
+    },
     // We are keeping token & expires for evry user 
     token:{
         type:String,
