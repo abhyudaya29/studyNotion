@@ -25,7 +25,7 @@ const userSchema=new mongoose.Schema({
     },
     accountType:{
         type:String,
-        enum:["Admin,Student,Instructor"],
+        enum: ["Admin", "Student", "Instructor"],
         required:true,
     },
     additionalDetails:{
@@ -43,9 +43,9 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    actibe:{
+    active:{
         type:Boolean,
-        required:true
+        default:true
 
     },
     // We are keeping token & expires for evry user 
@@ -62,4 +62,4 @@ const userSchema=new mongoose.Schema({
         }
     ]
 })
-module.exports=mongoose.Schema("User",userSchema)
+module.exports=mongoose.model("User",userSchema)

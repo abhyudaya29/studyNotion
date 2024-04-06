@@ -54,4 +54,4 @@ const courseSchema=new mongoose.Schema({
     enum:["Draft","Published"]
    }
 })
-module.exports=mongoose.Schema("Course",courseSchema)
+module.exports=mongoose.model("Course",courseSchema)

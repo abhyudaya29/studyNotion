@@ -10,4 +10,4 @@ const sectionSchema=new mongoose.Schema({
     ref:"SubSection"
    }]
 })
-module.exports=mongoose.Schema("Section",sectionSchema)
+module.exports=mongoose.model("Section",sectionSchema)
