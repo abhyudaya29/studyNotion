@@ -1,6 +1,5 @@
 const Course=require('../models/course');
-const tags = require('../models/tags');
-const Tag=require('../models/tags');
+
 const User=require('../models/user');
 const {uploadImageCloudinary}=require('../utils/imageUploader');
 
@@ -157,3 +156,32 @@ exports.getCourseDetails=async(req,res)=>{
         
     }
 }
+
+exports.getAllCourses = async (req, res) => {
+	try {
+		const allCourses = await Course.find(
+			{},
+			{
+				courseName: true,
+				price: true,
+				thumbnail: true,
+				instructor: true,
+				ratingAndReviews: true,
+				studentsEnroled: true,
+			}
+		)
+			.populate("instructor")
+			.exec();
+		return res.status(200).json({
+			success: true,
+			data: allCourses,
+		});
+	} catch (error) {
+		console.log(error);
+		return res.status(404).json({
+			success: false,
+			message: `Can't Fetch Course Data`,
+			error: error.message,
+		});
+	}
+};
