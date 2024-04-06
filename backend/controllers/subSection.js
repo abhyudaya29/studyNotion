@@ -53,7 +53,7 @@ exports.createSubSection=async(req,res)=>{
     }
 }
 // Todo:Update SubSection
-const updateSubSection=async (req,res)=>{
+exports.updateSubSection=async (req,res)=>{
     try {
         // fetch data
         const {title,description,videoUrl,subSectionId}=req.body;
@@ -86,7 +86,7 @@ const updateSubSection=async (req,res)=>{
 }
 
 // Todo:Delete  SubSection
-const deleteSubSection=async (req,res)=>{
+exports.deleteSubSection=async (req,res)=>{
     try {
         // fetch id from params
         const {subSectionId}=req.params;
