@@ -1,6 +1,6 @@
 const Section=require('../models/section');
 const Course=require("../models/course");
-const section = require('../models/section');
+// const section = require('../models/section');
 const section = require('../models/section');
 
 exports.createSection=async (req,res)=>{
