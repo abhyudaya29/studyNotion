@@ -1,6 +1,6 @@
 const cloudinary = require("cloudinary").v2; //! Cloudinary is being required
 
-exports.cloudinaryConnect = () => {
+const cloudinaryConnect = () => {
 	try {
 		cloudinary.config({
 			//!    ########   Configuring the Cloudinary to Upload MEDIA ########
@@ -12,3 +12,4 @@ exports.cloudinaryConnect = () => {
 		console.log(error);
 	}
 };
+module.exports={cloudinaryConnect}
