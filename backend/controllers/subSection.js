@@ -1,6 +1,7 @@
 const SubSection=require('../models/subSection');
 const Section=require("../models/section");
 const { uploadImageToCloudinary } = require('../utils/imageUploader');
+const section = require('../models/section');
 // const subSection = require('../models/subSection');
 
 exports.createSubSection=async(req,res)=>{
@@ -27,19 +28,20 @@ exports.createSubSection=async(req,res)=>{
             description:description,
             videoUrl:uploadDetails.secure_url
         });
+        console.log(subSectionDetails,">>sub sec details");
         // update section with this sub-section object id
         const updatedSection=await Section.findByIdAndUpdate({_id:sectionId},
             {$push:{
-                SubSection:subSectionDetails._id
+                subSection:subSectionDetails._id
                 // TODO:log updated section here after adding populate
-            }},{new:true}).populate("SubSection").exec()
+            }},{new:true}).populate("subSection").exec()
 
-            console.log(updatedSection,"Updated section");
+            console.log(updatedSection,">>>Updated section");
         // return response
-        return res.status.json({
-            success:false,
+        return res.status(200).json({
+            success:true,
             message:"Sub section created Successfully",
-            updatedSection,
+            data:updatedSection
         })
 
         
@@ -47,7 +49,7 @@ exports.createSubSection=async(req,res)=>{
         console.log(error,"Error in creating  sub section");
         res.status(500).json({
             success:false,
-            message:"Error in creation of user"
+            message:"Error in creation of sub section"
         })
         
     }
