@@ -1,7 +1,7 @@
 const Profile=require('../models/Profile');
-const user = require('../models/user');
+// const user = require('../models/user');
 const User=require('../models/user');
-
+const {uploadImageToCloudinary}=require("../utils/imageUploader");
 
 exports.updateProfile=async (req,res)=>{
     try {
@@ -11,7 +11,7 @@ exports.updateProfile=async (req,res)=>{
         // get user id
         const id=req.user.id;
         // validate
-        if(!contactNumber || !gender){
+        if(!contactNumber  || !dateOfBirth || !about|| !gender){
             return res.status(400).json({
                 success:false,
                 message:"Please provide all fields"
@@ -108,8 +108,11 @@ exports.getAllUserDetails=async(req,res)=>{
 }
 exports.updateDisplayPicture=async(req,res)=>{
     try {
-        const displayImage=req.file.path;
+        console.log(req.files.displayPicture,">>req.file.path")
+        const displayImage=req.files.displayPicture;
+        console.log(displayImage,">>display image")
         const userId=req.user.id
+        console.log(userId,">>>user id");
         const image=await uploadImageToCloudinary(
             displayImage,
             process.env.FOLDER_NAME,
@@ -119,7 +122,9 @@ exports.updateDisplayPicture=async(req,res)=>{
         console.log(image,">>>image");
 
         const updateProfile=await User.findByIdAndUpdate(
-            {id:userId},
+            // {id:userId},
+            // faced error due to passing object id instead of passing document id
+            userId,
             {image:image.secure_url},
             {new:true},);
         return res.status(200).json({
