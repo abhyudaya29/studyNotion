@@ -1,14 +1,16 @@
+const Category = require('../models/category');
 const Course=require('../models/course');
 
 const User=require('../models/user');
-const {uploadImageCloudinary}=require('../utils/imageUploader');
+const {uploadImageToCloudinary}=require('../utils/imageUploader');
 
 // create the course
 exports.createCourse=async (req,res)=>{
     try {
         // fetch data
-        const {courseName,courseDescription,whatYouWillLearn,price,tag}=req.body;
-        const thumbnail=req.file.thumbnailImage
+        const {courseName,courseDescription,whatYouWillLearn,price,tag,category}=req.body;
+        const thumbnail=req.files.thumbnailImage;
+        console.log(thumbnail,">>thumbnail");
         // validation
         if(!courseName || !courseDescription ||!whatYouWillLearn ||!price||!tag) return res.status(400).json({
             success:false,
@@ -26,17 +28,19 @@ exports.createCourse=async (req,res)=>{
             })
         }
         // check given tag valid or not
-        const tagDetails=await Tag.findById(tag);
-        if(!tagDetails){
+        const categoryDetails=await Category.findById(category);
+        if(!categoryDetails){
             return res.status(404).json({
                 success:false,
-                message:"InstrTag detail details not found"
+                message:"category Details   not found"
             })
 
         }
 
         // uplaod image
-        const thumbnailImage=await uploadImageCloudinary(file,process.env.FOLDER_NAME);
+        const thumbnailImage=await uploadImageToCloudinary(thumbnail,process.env.FOLDER_NAME);
+        // error occuring as uploadImageCloudinary is not a function
+        // Now-->resolved
 
         // create entry for new course
         const newCourse=await Course.create({
@@ -45,8 +49,9 @@ exports.createCourse=async (req,res)=>{
             instructor:instructorDetails._id,
             whatYouWillLearn:whatYouWillLearn,
             price,
-            tag:tagDetails._id,
-            thumbnail:thumbnailImage.secure_url
+            category:categoryDetails._id,
+            thumbnail:thumbnailImage.secure_url,
+            
 
         })
         // add the new course to the user schema of instructor
@@ -67,11 +72,12 @@ exports.createCourse=async (req,res)=>{
         // return response
         return res.status(200).json({
             success:true,
-            message:"Course created succesully"
+            message:"Course created succesully",
+            data:newCourse
         })
         
     } catch (error) {
-        console.log(error,"error occured in creatinf course");
+        console.log(error,"error occured in creating course");
         res.status(500).json({
                 success:false,
                 message:"error occured in creating course",
@@ -133,6 +139,7 @@ exports.getCourseDetails=async(req,res)=>{
                     path:"subSection"
                 },
             }).exec();
+        console.log(courseDetails,">course details")
         if(!courseDetails){
             return res.status(404).json({
                 success:false,
