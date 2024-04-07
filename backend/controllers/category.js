@@ -21,7 +21,7 @@ exports.createCategory=async (req,res)=>{
         console.log(categoryDetails,">>tag details");
         // return response
         res.status(200).json({
-            success:false,
+            success:true,
             message: "Category Created Successfully",
         })
 
@@ -41,18 +41,21 @@ exports.showAllCategory=async(req,res)=>{
     try {
         // making api call to get all tags  from db,we are not finding on basic of any paremeter
         // but making sure that name and description should be present
-        const allCategory=Category.find({},{name:true,description:true})
+        const allCategory=await Category.find({},{name:true,description:true})
+        // forgot to use await whcih led to -->TypeError: Converting circular structure to JSON in nodejs
+        console.log(allCategory,">>all cat");
         return res.status(200).json({
             success:true,
-            message:"Fetched all tags"
+            message:"Fetched all Category",
+            data:allCategory,
         })
 
         
     } catch (error) {
-        console.log(error, 'Error in show all Tags');
+        console.log(error, 'Error in show all Category');
         return res.status(500).json({
             success:false,
-            message:"Error in fetching all tags"
+            message:"Error in fetching all Category"
         })
         
     }
