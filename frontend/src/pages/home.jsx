@@ -3,6 +3,10 @@ import {ArrowRightFromLine} from "lucide-react"
 import { Link } from "react-router-dom"
 import HighlightText from "../components/core/HomePage/hilightText"
 import CTAButton from "../components/core/HomePage/Button"
+import Banner from "../assets/Logo/Logo-Full-Dark.png";
+import Video from "../assets/Images/banner.mp4"
+import CodeBlocks from "../components/core/HomePage/codeBlocks";
+// 
 const Home=()=>{
     return (
         <>
@@ -34,13 +38,119 @@ const Home=()=>{
                         </CTAButton >
                         <CTAButton active={false} linkto={"/login"}>
                             Book a Demo
-                            
-
                         </CTAButton>
                     </div>
+                    <div className="mx-3 my-12 shadow-blue-200">
+                        <video className="" 
+                        muted
+                        autoPlay
+                        loop
+                        src={Video} alt="there us a video" />
+                    </div>
+                    {/* code section 1 */}
+                    <div className="">
+                        <CodeBlocks 
+                        position={"lg:flex-row"}
+                        heading={
+                            <div className="text-4xl font-bold">
+                                Unlock your coding pottential 
+                                <HighlightText text={"coding Potential"}/>
+                                with our online courses
+                            </div>
+                        }
+                        subheading={
+                            "Our courses are described and taught by industry experts who have years of experience inn filed of Technology"
+                        }
+                        ctab1={
+                            {
+                                text:"Try it yourself",
+                                linkto:"/signup",
+                                active:true,
+                            }
+                        }
+                        ctab2={
+                            {
+                                text:"Learn more",
+                                linkto:"/login",
+                                active:false,
+                            }
+                        }
+                        codeblock ={`const motivateYou = async () => {
+                            try {
+                                const motivationSource = await connectToMotivationSource();
+                                const motivationMessage = await motivationSource.getMotivation("Your Goal");
+                                console.log(motivationMessage);
+                            } catch (error) {
+                                console.error("Failed to retrieve motivational ,Trye Once Again:", error);
+                            }
+                        };
+                    }
+                    `}
+                        
+                                
+                        
+                                
+                        codeColor={"text-yellow-25"}
+                        />
+                        {/* <CodeBlocks/> */}
+
+                    </div>
+
+
+                    {/* code section 2 */}
+                    <div className="">
+                        <CodeBlocks 
+                        position={"lg:flex-row-reverse"}
+                        heading={
+                            <div className="text-4xl font-bold">
+                                Start
+                                <HighlightText text={"coding in seconds"}/>
+                            
+                            </div>
+                        }
+                        subheading={
+                            "Our courses are described and taught by industry experts who have years of experience inn filed of Technology"
+                        }
+                        ctab1={
+                            {
+                                text:"Try it yourself",
+                                linkto:"/signup",
+                                active:true,
+                            }
+                        }
+                        ctab2={
+                            {
+                                text:"Learn more",
+                                linkto:"/login",
+                                active:false,
+                            }
+                        }
+                        codeblock ={`const motivateYou = async () => {
+                            try {
+                                const motivationSource = await connectToMotivationSource();
+                                const motivationMessage = await motivationSource.getMotivation("Your Goal");
+                                console.log(motivationMessage);
+                            } catch (error) {
+                                console.error("Failed to retrieve motivational ,Trye Once Again:", error);
+                            }
+                        };
+                    }
+                    `}
+                        
+                                
+                        
+                                
+                        codeColor={"text-yellow-25"}
+                        />
+                        {/* <CodeBlocks/> */}
+
+                    </div>
+               
+
                 
             </div>
             {/* section 2 */}
+            
             {/* section 3 */}
             {/* footer */}
         </div>
