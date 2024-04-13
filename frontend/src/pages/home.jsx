@@ -6,6 +6,8 @@ import CTAButton from "../components/core/HomePage/Button"
 import Video from "../assets/Images/banner.mp4"
 import CodeBlocks from "../components/core/HomePage/codeBlocks";
 import home_bg from "../assets/Images/bghome.svg"
+import TimelineSection from "../components/core/HomePage/timelineSection"
+import LearningLanguageSection from "../components/core/HomePage/learningLanguageSection"
 // 
 const Home=()=>{
     return (
@@ -211,7 +213,10 @@ const Home=()=>{
                     </div>
 
 
+                <TimelineSection/>
+                <LearningLanguageSection/>
                 </div>
+                
 
             </div>
             
