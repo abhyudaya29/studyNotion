@@ -5,9 +5,11 @@ import HighlightText from "../components/core/HomePage/hilightText"
 import CTAButton from "../components/core/HomePage/Button"
 import Video from "../assets/Images/banner.mp4"
 import CodeBlocks from "../components/core/HomePage/codeBlocks";
-import home_bg from "../assets/Images/bghome.svg"
+// import home_bg from "../assets/Images/bghome.svg"
 import TimelineSection from "../components/core/HomePage/timelineSection"
 import LearningLanguageSection from "../components/core/HomePage/learningLanguageSection"
+import InstructorSection from "../components/core/HomePage/instructorSection"
+import Footer from "../components/common/footer"
 // 
 const Home=()=>{
     return (
@@ -221,7 +223,15 @@ const Home=()=>{
             </div>
             
             {/* section 3 */}
+            <div className="w-11/12 mx-auto max-w-maxContent flex-col items-center justify-between gap-8 first-letter: bg-richblack-900 text-white">
+                <InstructorSection/>
+                <h2 className="text-center text-4xl font-semibold mt-10">review from Other Learners</h2>
+                {/* Review slider */}
+
+
+            </div>
             {/* footer */}
+            <Footer/>
         </div>
         </>
     )
