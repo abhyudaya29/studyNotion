@@ -26,13 +26,13 @@ export const HomePageExplore = [
         tag: 'New to coding',
         courses : [
             {
-                heading : "HTML",
+                heading : "Python",
                 description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
                 level : 'Beginner',
                 lessionNumber : 6
             },
             {
-                heading : "CSS",
+                heading : "Node",
                 description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
                 level : 'Beginner',
                 lessionNumber : 6
