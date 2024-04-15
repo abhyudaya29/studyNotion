@@ -10,6 +10,7 @@ import TimelineSection from "../components/core/HomePage/timelineSection"
 import LearningLanguageSection from "../components/core/HomePage/learningLanguageSection"
 import InstructorSection from "../components/core/HomePage/instructorSection"
 import Footer from "../components/common/footer"
+import ExploreMore from "../components/core/HomePage/exploreMore"
 // 
 const Home=()=>{
     return (
@@ -52,6 +53,7 @@ const Home=()=>{
                         src={Video} alt="there us a video" />
                     </div>
                     {/* code section 1 */}
+
                     <div className="">
                         <CodeBlocks 
                         position={"lg:flex-row"}
@@ -149,6 +151,7 @@ const Home=()=>{
                         {/* <CodeBlocks/> */}
 
                     </div>
+                    <ExploreMore/>
                
 
                 
