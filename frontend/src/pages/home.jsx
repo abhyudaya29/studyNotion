@@ -28,7 +28,7 @@ const Home=()=>{
                         </button>
                     </div>
 
-                    <div className="text-center text-4xl font-semibold mt-7">
+                    <div className="text-center text-4xl font-semibold mt-7 ">
                         Empower Your Future With 
                         <HighlightText text={"Coding Skills"}/>
                     </div>
@@ -240,3 +240,5 @@ const Home=()=>{
     )
 }
 export default Home
+
+
