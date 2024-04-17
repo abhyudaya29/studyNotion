@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Template from '../components/core/Auth/Templates'
 import signupImg from "../assets/Images/signup.webp"
 const SignUp = () => {
