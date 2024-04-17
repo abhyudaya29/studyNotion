@@ -17,7 +17,7 @@ const Home=()=>{
         <>
         <div className="">
             {/* Section 1 */}
-            <div className="realtive mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
+            <div className="realtive mx-auto flex flex-col  w-11/12 max-w-maxContent items-center text-white justify-between">
                 
                     <div className=" group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit">
                     <button className="flex flex-row gap-2 rounded-full px-10 py-[5]px translate-all duration-200 group-hover:bg-richblack-900 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
