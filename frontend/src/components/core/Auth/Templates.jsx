@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { FcGoogle } from "react-icons/fc"
 // import { useSelector } from "react-redux"
 
