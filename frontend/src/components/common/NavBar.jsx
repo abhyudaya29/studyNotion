@@ -33,8 +33,8 @@ const NavBar = () => {
     const fetchSublinks=async()=>{
         try {
             const result=await apiConnector("GET",categories.CATEGORIES_API);
-            console.log(result,">>>result Category")
             setSubLinks(result.data.data);
+            console.log(result.data.data,">>>result Category")
             
         } catch (error) {
             console.log(error,">>error while fetching categorylist")
@@ -77,17 +77,20 @@ const NavBar = () => {
                                                 '>
                                                     <div className='absolute left-[50%] top-0 h-6 w-6 rotate-45 rounded bg-richblack-5 translate-x-[80%] translate-y-[-45%]'></div>
                                                         {
-                                                            dummy.length>0&&(
+                                                            subLinks.length?(
+                                                                
+                                                                    subLinks.map((items,index)=>{
+                                                                        return (
+                                                                            <>
+                                                                            <p key={index}>{items.name}</p>
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                
+                                                            ):(
                                                                 <>
-                                                                {dummy?.map((item,index)=>{
-                                                                    return (
-                                                                        <>
-                                                                        <div key={index}>
-                                                                            {item.subContent}
-                                                                        </div>
-                                                                        </>
-                                                                    )
-                                                                })}
+                                                                <div>
+                                                                </div>
                                                                 </>
                                                             )
                                                         }
