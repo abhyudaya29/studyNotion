@@ -66,7 +66,7 @@ exports.sendOTP=async (req,res)=>{
 exports.signUp=async (req,res)=>{
     try{
         // fetch data
-        const {firstName,lastName,email,password,confirmPassword,contactNumber,accountType,otp}=req.body;
+        const {firstName,lastName,email,password,confirmPassword,accountType,contactNumber,otp}=req.body;
         console.log(req.body,">>req.bodyyyy")
         // validate data
         if(!firstName ||!lastName || !email ||!password||!confirmPassword  || !otp){
