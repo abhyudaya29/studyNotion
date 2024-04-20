@@ -4,8 +4,20 @@
 import { useState } from "react"
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import Tab from "../../common/Tab"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
+import { setSignupData } from "../../../slices/authSlice"
 
+import toast from "react-hot-toast"
+import { sendOTP } from "../../../services/operations/auth"
 const  SignupForm=()=>{
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+  
+  const[accountType,setAccountType]=useState(ACCOUNT_TYPE.STUDENT);
+  console.log(accountType,"ACCOUNT_TYPE")
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -14,11 +26,12 @@ const  SignupForm=()=>{
     password: "",
     confirmPassword: "",
   })
-
+  
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const { firstName, lastName, email, password, confirmPassword } = formData
+
 
   // Handle input fields, when some value changes
   const handleOnChange = (e) => {
@@ -31,6 +44,18 @@ const  SignupForm=()=>{
   // Handle Form Submission
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    if(password!=confirmPassword){
+      toast.error("Password Dosent Match");
+      return;
+    }
+    const signupData={
+      
+      ...formData,
+      accountType
+      
+    }
+    dispatch(setSignupData(signupData));
+    dispatch(sendOTP(formData.email,navigate));
  // Reset
     setFormData({
       firstName: "",
@@ -39,16 +64,29 @@ const  SignupForm=()=>{
       password: "",
       confirmPassword: "",
     })
+    setAccountType(ACCOUNT_TYPE.STUDENT)
     
   }
 
   // data to pass to Tab component
+  const tabData = [
+    {
+      id: 1,
+      tabName: "Student",
+      type: ACCOUNT_TYPE.STUDENT,
+    },
+    {
+      id: 2,
+      tabName: "Instructor",
+      type: ACCOUNT_TYPE.INSTRUCTOR,
+    },
+  ]
   
 
   return (
     <div>
       {/* Tab */}
-      
+      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
