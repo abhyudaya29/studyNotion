@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.15",
     "@reduxjs/toolkit": "^2.2.3",
+    "antd": "^5.16.3",
     "axios": "^1.6.8",
     "concurrently": "^8.2.2",
     "lucide-react": "^0.366.0",
