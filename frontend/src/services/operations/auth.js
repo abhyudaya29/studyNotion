@@ -5,6 +5,9 @@ import { endpoints } from "../apis";
 import { setloading,setToken } from "../../slices/authSlice";
 import{toast} from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../slices/profileSlice";
+import { resetCart } from "../../slices/cartSlice";
+
 const{
     LOGIN_API,
     SIGNUP_API,
@@ -79,8 +82,12 @@ export function login(email,password,navigate){
                 throw new Error(response.data.message);
             }
             console.log(response,">>>respons elogin data");
-            toast.success("Login successfully");
+            // console.log(response.data.user.image)
+            const userImage=response.data?.user?.image?(response.data.user.image):(`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`)
+            dispatch(setUser({...response.data.user,image:userImage}))
+            localStorage.setItem("token", JSON.stringify(response.data.token))
             dispatch(setToken(response.data.token));
+            toast.success("Login successfully");
 
             
             navigate("/dashboard/my-profile");
@@ -122,4 +129,16 @@ export  function getPasswordResetToken(email,setEmailSent){
         dispatch(setloading(false));
     }
 
+}
+
+export function logOut(navigate){
+    return (dispatch)=>{
+        dispatch(setToken(null));
+        dispatch(setUser(null));
+        dispatch(resetCart());
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        toast.success("Logout Successfully");
+        navigate('/')
+    }
 }
