@@ -1,24 +1,31 @@
 /* eslint-disable no-unused-vars */
 
-import { Link, matchPath } from 'react-router-dom'
+import { Link, matchPath, useNavigate } from 'react-router-dom'
 import { NavbarLinks } from '../../data/navbar-links'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { useLocation } from 'react-router-dom'
 import { CiShoppingCart } from "react-icons/ci";
 // import { matchPath } from 'react-router-dom'; // Make sure the import is correct.
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ProfileDropdown from '../core/Auth/ProfileDropdown';
 import { useEffect, useState } from 'react';
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
+import { logOut } from '../../services/operations/auth';
 const NavBar = () => {
     const{token}=useSelector((state)=>state.auth);
     const{user}=useSelector((state)=>state.profile);
     const{totalItems}=useSelector((state)=>state.cart);
     const location=useLocation()
+    const dispatch=useDispatch()
+    const navigate=useNavigate();
     const matchRoute=(route)=>{
         return matchPath({path:route},location.pathname)
+    }
+    const handleLogout=()=>{
+        dispatch(logOut(navigate));
+        
     }
     const [subLinks,setSubLinks]=useState([])
     const dummy=[
@@ -164,7 +171,12 @@ const NavBar = () => {
                 {
                     token!=null&&(
                         <>
-                        <ProfileDropdown/>
+                        <div className='text-white flex gap-3'>
+                            <ProfileDropdown/>
+                            <button onClick={handleLogout}>
+                                LogOut
+                            </button>
+                        </div>
                         </>
                     )
                 }
