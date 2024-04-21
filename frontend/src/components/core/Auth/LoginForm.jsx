@@ -1,14 +1,18 @@
 /* eslint-disable react/jsx-no-undef */
 import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
+import { login } from "../../../services/operations/auth"
 const  LoginForm=()=>{
   
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -22,7 +26,8 @@ const  LoginForm=()=>{
   }
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    dispatch(login(email,password,navigate))
     
   }
 
