@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 import { setSignupData } from "../../../slices/authSlice"
-
+import { signUp } from "../../../services/operations/auth"
 import toast from "react-hot-toast"
 import { sendOTP } from "../../../services/operations/auth"
 const  SignupForm=()=>{
@@ -54,7 +54,7 @@ const  SignupForm=()=>{
       accountType
       
     }
-    dispatch(setSignupData(signupData));
+    dispatch(signUp(signupData));
     dispatch(sendOTP(formData.email,navigate));
  // Reset
     setFormData({
