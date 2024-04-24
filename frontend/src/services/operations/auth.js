@@ -2,11 +2,12 @@
 /* eslint-disable no-unused-vars */
 import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
-import { setloading,setToken } from "../../slices/authSlice";
+import { setError, setloading,setToken } from "../../slices/authSlice";
 import{toast} from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../slices/profileSlice";
 import { resetCart } from "../../slices/cartSlice";
+
 
 const{
     LOGIN_API,
@@ -78,23 +79,29 @@ export function login(email,password,navigate){
                 email,
                 password
             })
-            if(!response){
+            if(!response.data.success){
+                toast.dismiss(!response.data.success)
+                // navigate('/login')
                 throw new Error(response.data.message);
             }
-            console.log(response,">>>respons elogin data");
+            console.log(response,">>responseee")
+            console.log(response.data.message,">>>respons elogin data");
             // console.log(response.data.user.image)
             const userImage=response.data?.user?.image?(response.data.user.image):(`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`)
             dispatch(setUser({...response.data.user,image:userImage}))
-            localStorage.setItem("token", JSON.stringify(response.data.token))
-            dispatch(setToken(response.data.token));
+            dispatch(setToken(localStorage.setItem("token", JSON.stringify(response.data.token))))
+            
             toast.success("Login successfully");
 
             
             navigate("/dashboard/my-profile");
         } catch (error) {
             console.log(error,">>error while Login");
-            toast.dismiss("Issue In Login");
-            navigate("login");
+            // dispatch(addError(error))
+            toast.error("Issue In Login");
+            navigate("/login");
+            // throw new Error(error.message)
+            dispatch(setError(error.response.data.message))
 
 
             
