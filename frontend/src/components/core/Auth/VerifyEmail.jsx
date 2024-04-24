@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux"
 import OtpInput from 'react-otp-input';
 import { Link, useNavigate } from "react-router-dom";
 import { sendOTP, signUp } from "../../../services/operations/auth";
+import { setSignupData } from "../../../slices/authSlice"
 const VerifyEmail = () => {
   const{signupData,loading}=useSelector((state)=>(state.auth))
+  console.log(signupData,">signupDatasignupData")
   const[otp,setOtp]=useState("");
   console.log(otp,"//frontend otp")
   const dispatch=useDispatch();

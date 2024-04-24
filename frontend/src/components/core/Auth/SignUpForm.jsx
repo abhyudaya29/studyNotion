@@ -51,11 +51,13 @@ const  SignupForm=()=>{
     const signupData={
       
       ...formData,
-      accountType
+      accountType,
       
     }
-    dispatch(signUp(signupData));
+    dispatch(setSignupData(signupData));
     dispatch(sendOTP(formData.email,navigate));
+    
+    
  // Reset
     setFormData({
       firstName: "",

@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-undef */
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { login } from "../../../services/operations/auth"
 const  LoginForm=()=>{
@@ -15,6 +15,13 @@ const  LoginForm=()=>{
   const dispatch=useDispatch();
 
   const [showPassword, setShowPassword] = useState(false)
+  let[errorMessage,setErrorMessage]=useState("");
+  const{error}=useSelector((state)=>state.auth);
+  console.log(error,">>kya aya hai mera naya error msg")
+  // setErrorMessage(error)
+  // errorMessage=error.response.data.message
+  
+  
 
   const { email, password } = formData
 
@@ -25,18 +32,23 @@ const  LoginForm=()=>{
     }))
   }
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login(email,password,navigate))
-    
-  }
-
+    dispatch(login(email, password, navigate));
+  };
+  useEffect(()=>{
+    if(error){
+      setErrorMessage(error)
+    }
+  },[error])
+  
   return (
     <form
       onSubmit={handleOnSubmit}
       className="mt-6 flex w-full flex-col gap-y-4"
     >
       <label className="w-full">
+         {errorMessage && <p className="text-white">{errorMessage}</p>}
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
           Email Address <sup className="text-pink-200">*</sup>
         </p>
