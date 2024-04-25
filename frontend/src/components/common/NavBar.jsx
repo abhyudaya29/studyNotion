@@ -169,7 +169,7 @@ const NavBar = () => {
                     )
                 }
                 {
-                    token!=null&&(
+                    token!==null&&(
                         <>
                         <div className='text-white flex gap-3'>
                             <ProfileDropdown/>

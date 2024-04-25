@@ -9,6 +9,7 @@ import NavBar from './components/common/NavBar'
 import VerifyEmail from './components/core/Auth/VerifyEmail'
 import ForgotPassword from './pages/forgotPassword'
 import AboutUs from './pages/aboutUs'
+import MyProfile from './components/core/Dashboard/MyProfile'
 function App() {
   
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/about' element={<AboutUs/>}/>
+        <Route path='/dashboard/my-profile' element={<MyProfile/>}/>
         <Route path='/forgot-password' element={<ForgotPassword/>}/>
 
         <Route path="/verify-email" element={<VerifyEmail/>}/>
