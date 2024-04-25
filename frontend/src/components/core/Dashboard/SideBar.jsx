@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/no-unknown-property */
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarLinks } from "../../../data/dashboard-links";
@@ -22,24 +23,24 @@ const SideBar = () => {
 
     return (
         <div>
-            <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700 h-[calc[100vh-3.5rem]] bg-richblack-800 py-10">
+            <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10">
                 <div className="flex flex-col">
-                    {sidebarLinks.map((link, index) => {
-                        if (link.type && user?.accounttype !== link.type) return null;
+                    {sidebarLinks.map((link) => {
+                        if (link.type && user?.accountType !== link.type) return null;
                         return (
-                            <div key={index}>
-                                <SideBadlinks links={link} iconName={link.icon} />
+                            <div>
+                                <SideBadlinks key={link.id} link={link} iconName={link.icon} />
                             </div>
                         );
                     })}
                 </div>
-                <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 bg-richblack-600">
+                <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 bg-richblack-700">
 
                 </div>
                 <div className="flex flex-col">
                     <SideBadlinks
-                    links={{name:"Seetings",path:"dashboard/seetings"}}
-                    iconName={<VscGear />}
+                    link={{name:"Seetings",path:"dashboard/seetings"}}
+                    iconName="VscGear" 
                     />
                 <button onClick={() => {
                 setConformationModal({
@@ -50,7 +51,7 @@ const SideBar = () => {
                     btn1Handler: () => dispatch(logOut(navigate)),
                     btn2Handler: () => setConformationModal(null)
                 });
-            }} className="text-sm font-medium text-richblack-300">
+            }} className="px-8 py-2 text-sm font-medium text-richblack-300">
                 <div className="flex items-center gap-x-2">
                 <VscSignOut  className="text-lg"/>
                 <span>Logout</span>
