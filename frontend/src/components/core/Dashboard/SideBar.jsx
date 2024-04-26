@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { logOut } from "../../../services/operations/auth";
 import { VscSignOut } from "react-icons/vsc";
+import { BounceLoader } from "react-spinners";
 const SideBar = () => {
     const { user, loading: profileLoading } = useSelector((state) => state.profile);
     const { loading: authLoading } = useSelector((state) => state.auth);
@@ -17,7 +18,7 @@ const SideBar = () => {
 
     if (profileLoading || authLoading) {
         return (
-            <div className="mt-10">Loading....</div>
+            <div className="mt-10"><BounceLoader color="hsla(248, 67%, 53%, 1)"/></div>
         );
     }
 

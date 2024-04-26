@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { Link } from "react-router-dom";
 import { getPasswordResetToken } from "../services/operations/auth";
+import { BounceLoader } from "react-spinners";
 const ForgotPassword = () => {
     const[emailSent,setEmailSent]=useState(false);
     const[email,setEmail]=useState("");
@@ -20,7 +21,7 @@ const ForgotPassword = () => {
         {
             loading?(
                 <>
-                <div>Loading....</div>
+                <div><BounceLoader color="hsla(248, 67%, 53%, 1)"/></div>
                 </>
             ):(
                 <>

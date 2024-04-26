@@ -1,15 +1,19 @@
 import { useSelector } from "react-redux"
 import { Outlet } from "react-router-dom";
 import SideBar from "../components/core/Dashboard/SideBar";
-
+import {BounceLoader} from "react-spinners"
+import {PulseLoader} from "react-spinners"
 const Dashboard = () => {
-    const{loading:authloading}=useSelector((state)=>state.auth);
+    const{loading:authLoading}=useSelector((state)=>state.auth);
     const{loading:profileLoading}=useSelector((state)=>state.profile);
-    if(profileLoading || authloading){
+    if(profileLoading || authLoading){
         return (
             <>
-            <div className="mt-10">
-                Loading
+            <div className="mt-[200px] text-white flex flex-col gap-2 justify-center items-center ">
+            <BounceLoader color="hsla(248, 67%, 53%, 1)"/>
+            <p >
+               <BounceLoader color="hsla(248, 67%, 53%, 1)"/> <span><PulseLoader color="#36d7b7" size="10" /></span>
+            </p>
             </div>
             </>
         )

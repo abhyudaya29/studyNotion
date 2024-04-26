@@ -1,15 +1,18 @@
-import React, { Children } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-const PrivateRoute = ({children}) => {
-    const{token}=useSelector((state)=>state.auth);
-    if(token!==null){
-        return children
+import { setToken } from '../../../slices/authSlice';
+
+const PrivateRoute = ({ children }) => {
+    const dispatch=useDispatch()
+    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
+    // dispatchEvent(setToken(token))
+    console.log(token, "token for pr");
+    if (token !== null) {
+        return children;
+    } else {
+        return <Navigate to="/login" />;
     }
-    else{
-        return <Navigate to="/login"/>
-    }
-  
 }
 
-export default PrivateRoute
+export default PrivateRoute;

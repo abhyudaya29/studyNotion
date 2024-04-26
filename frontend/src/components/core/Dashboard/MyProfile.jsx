@@ -5,6 +5,7 @@ import IconButton from '../../common/iconButton';
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.profile);
+  
   const navigate = useNavigate();
 
   // Function to format date

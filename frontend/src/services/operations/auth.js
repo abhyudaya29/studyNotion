@@ -86,17 +86,19 @@ export function login(email,password,navigate){
             }
             console.log(response,">>responseee")
             console.log(response.data.message,">>>respons elogin data");
+            toast.success("Login Successful")
             // console.log(response.data.user.image)
+            dispatch(setToken(response.data.token))
+            // dispatch(setToken(localStorage.setItem("token", JSON.stringify(response.data.token))))
             const userImage=response.data?.user?.image?(response.data.user.image):(`https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`)
             dispatch(setUser({...response.data.user,image:userImage}))
 
-            dispatch(setToken(localStorage.setItem("token", JSON.stringify(response.data.token))))
             localStorage.setItem("token", JSON.stringify(response.data.token))
             localStorage.setItem("user", JSON.stringify(response.data.user))
-            toast.success("Login successfully");
+            navigate("/dashboard/my-profile");
+            // toast.success("Login successfully");
 
             
-            navigate("/dashboard/my-profile");
         } catch (error) {
             console.log(error,">>error while Login");
             // dispatch(addError(error))
@@ -108,6 +110,7 @@ export function login(email,password,navigate){
 
             
         }
+        dispatch(setloading(false));
     }
 }
 
