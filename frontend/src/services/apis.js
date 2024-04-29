@@ -11,3 +11,8 @@ export const endpoints={
     LOGIN_API:BASE_URL+"/auth/login",
     RESETPASSWORD_API:BASE_URL+"/auth/reset-password"
 }
+// Profile ENDPOINTS
+export const profileEndPoints={
+    GET_USER_DETAILS_API:BASE_URL+"/profile/getAllUserDetails",
+    GET_USER_ENROLLED_COURSES:BASE_URL+"/profile/getEnrolledCourses",
+}
