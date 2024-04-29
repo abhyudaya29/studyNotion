@@ -6,7 +6,10 @@ require("dotenv").config();
 exports.auth=async (req,res,next)=>{
     try{
         // get token
-        const token=req.cookies.token ||req.body.token || req.header("Authorisation").replace("Bearer ","");
+        console.log("token before millde ware execution")
+        // const token=req.cookies.token ||req.body.token || req.header("Authorisation").replace("Bearer ","")|| localStorage.getItem("token")?JSON.parse(localStorage.getItem("token"))
+        const token=req.cookies.token ||req.body.token || req.headers.authorization.replace("Bearer ","")
+        console.log(token,"???token in auth middleware");
         // if token missing then return response
         if(!token){
             return res.status(401).json({
@@ -19,9 +22,12 @@ exports.auth=async (req,res,next)=>{
             const decode=jwt.verify(token,process.env.JWT_SECRET);
             console.log(decode,"Decode secret key");
             req.user=decode;
+            console.log(req.user,">>>>>>req.userrr");
+            
 
 
         }catch(error){
+            console.log(error,"error in ")
             return res.status(401).json({
                 success:false,
                 message:"Token is invalid"
@@ -32,9 +38,9 @@ exports.auth=async (req,res,next)=>{
 
     }catch(error){
         console.log(error,"Error occured in auth Middleware");
-        return res.status(401).json({
+        return res.status(500).json({
             success:false,
-            message:"Error occured "
+            message:error
         })
     }
 }
