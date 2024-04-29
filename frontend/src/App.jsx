@@ -13,6 +13,7 @@ import MyProfile from './components/core/Dashboard/MyProfile'
 import Dashboard from './pages/Dashboard'
 import PrivateRoute from './components/core/Auth/ProvateRoute'
 import Enrolled from './components/core/Dashboard/Enrolled'
+import Cart from './components/core/Dashboard/Cart'
 function App() {
   
 
@@ -37,6 +38,11 @@ function App() {
         >
           <Route path='/dashboard/my-profile' element={<MyProfile/>}/>
           <Route path='dashboard/enrolled-courses' element={<Enrolled/>}/>
+          <Route path='dashboard/cart' element={<Cart/>}/>
+          {/* {
+            user?.ACCOUNT_TYPE
+          } */}
+          {/* <Route path='dashboard/enrolled-courses' element={</>}/> */}
           </Route>
 
         
