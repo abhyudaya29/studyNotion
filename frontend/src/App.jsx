@@ -12,6 +12,7 @@ import AboutUs from './pages/aboutUs'
 import MyProfile from './components/core/Dashboard/MyProfile'
 import Dashboard from './pages/Dashboard'
 import PrivateRoute from './components/core/Auth/ProvateRoute'
+import Enrolled from './components/core/Dashboard/Enrolled'
 function App() {
   
 
@@ -25,6 +26,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/about' element={<AboutUs/>}/>
         
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path="/verify-email" element={<VerifyEmail/>}/>
         <Route 
         element={
           <PrivateRoute>
@@ -33,10 +36,9 @@ function App() {
         }
         >
           <Route path='/dashboard/my-profile' element={<MyProfile/>}/>
+          <Route path='dashboard/enrolled-courses' element={<Enrolled/>}/>
           </Route>
-        <Route path='/forgot-password' element={<ForgotPassword/>}/>
 
-        <Route path="/verify-email" element={<VerifyEmail/>}/>
         
       </Routes>
 
