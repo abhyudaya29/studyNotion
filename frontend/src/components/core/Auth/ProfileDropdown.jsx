@@ -7,7 +7,7 @@ const ProfileDropdown = () => {
 
   return (
     <>
-    <div>
+    <div className='mt-4'>
       {/* image */}
       <img
           src={user?.image}

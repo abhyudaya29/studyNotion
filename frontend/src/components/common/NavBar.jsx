@@ -13,6 +13,7 @@ import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import { logOut } from '../../services/operations/auth';
+import BasicSelect from './NavComp';
 const NavBar = () => {
     const{token}=useSelector((state)=>state.auth);
     const{user}=useSelector((state)=>state.profile);
@@ -130,7 +131,7 @@ const NavBar = () => {
                     user&&user?.accountType!="Instructor" &&(
                         <>
                         <Link to="/dashboard/cart" className='relative'>
-                        <CiShoppingCart />
+                        <CiShoppingCart className='text-white' />
                         {
                             totalItems>0&& (
                                 <>
@@ -171,11 +172,12 @@ const NavBar = () => {
                 {
                     token!==null&&(
                         <>
-                        <div className='text-white flex gap-3'>
+                        <div className='text-white flex gap-6 '>
                             <ProfileDropdown/>
-                            <button onClick={handleLogout}>
+                            <BasicSelect/>
+                            {/* <button onClick={handleLogout}>
                                 LogOut
-                            </button>
+                            </button> */}
                         </div>
                         </>
                     )
