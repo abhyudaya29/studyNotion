@@ -14,7 +14,13 @@ import Dashboard from './pages/Dashboard'
 import PrivateRoute from './components/core/Auth/ProvateRoute'
 import Enrolled from './components/core/Dashboard/Enrolled'
 import Cart from './components/core/Dashboard/Cart'
+import { ACCOUNT_TYPE } from './utils/constants'
+import AddCourses from './components/core/Dashboard/AddCourses'
+import { useSelector } from 'react-redux'
+
+
 function App() {
+  const{user}=useSelector((state)=>state.profile)
   
 
   return (
@@ -43,6 +49,14 @@ function App() {
             user?.ACCOUNT_TYPE
           } */}
           {/* <Route path='dashboard/enrolled-courses' element={</>}/> */}
+          {
+            user?.accountType===ACCOUNT_TYPE.INSTRUCTOR&&(
+              <>
+              <Route path='/dashboard/add-course' element={<AddCourses/>}/>
+
+              </>
+            )
+          }
           </Route>
 
         
