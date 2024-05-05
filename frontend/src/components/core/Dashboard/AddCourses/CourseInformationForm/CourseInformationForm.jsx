@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
-
+import { getAllCourses } from "../../../../../services/operations/courseDetails";
+import { useEffect } from "react";
 
 const CourseInformationForm = () => {
     const{
@@ -16,10 +17,19 @@ const CourseInformationForm = () => {
     const{course,editCourse}=useSelector((state)=>state.course);
     const{loading,setLoading}=useState(false);
     const[courseCategory,setCourseCategory]=useState([])
-    // useEffect(()=>{
+    const fetchCourses=async()=>{
+      console.log("Fetching stared")
+      const categories=await getAllCourses();
+      if(categories.length>0){
+        
+        setCourseCategory(categories)
+      }
+    }
+    useEffect(()=>{
+      fetchCourses()
         
 
-    // },[])
+    },[])
   return (
     <div>CourseInformationForm</div>
   )
